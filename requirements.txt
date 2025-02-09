@@ -1,0 +1,25 @@
+# FastAPI & Web Server
+fastapi
+uvicorn
+
+# Database & ORM
+sqlalchemy
+alembic
+psycopg2-binary  # For PostgreSQL, remove if using SQLite
+
+# Authentication & Security
+passlib[bcrypt]   # Secure password hashing
+python-jose       # JWT authentication
+python-multipart  # Form data handling for uploads
+
+# Data Processing
+pandas
+openpyxl          # For Excel file support (optional)
+pdfplumber        # If parsing PDF bank statements
+
+# Utility Libraries
+python-dotenv     # Environment variable management
+
+# Testing
+pytest
+httpx            # For testing FastAPI endpoints
