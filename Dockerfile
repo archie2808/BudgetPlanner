@@ -3,7 +3,7 @@ FROM python:3.11
 
 # Set the working directory inside the container
 WORKDIR /app
-
+ENV PYTHONPATH=/app
 # Copy project files into the container
 COPY . /app
 

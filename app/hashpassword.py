@@ -14,7 +14,8 @@ def hash_password(password: str) -> str:
     Returns:
         str: The hashed password.
     """
-    return pbkdf2_sha256.hash(password)
+    hashed_password = pbkdf2_sha256.hash(password)
+    return hashed_password
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
@@ -27,4 +28,5 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     Returns:
         bool: True if the password matches, False otherwise.
     """
-    return pbkdf2_sha256.verify(plain_password, hashed_password)
+    verified_password = pbkdf2_sha256.verify(plain_password, hashed_password)
+    return verified_password
