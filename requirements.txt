@@ -8,7 +8,7 @@ alembic
 psycopg2-binary  # For PostgreSQL, remove if using SQLite
 
 # Authentication & Security
-passlib[bcrypt]   # Secure password hashing
+passlib  # Secure password hashing
 python-jose       # JWT authentication
 python-multipart  # Form data handling for uploads
 
@@ -19,6 +19,7 @@ pdfplumber        # If parsing PDF bank statements
 
 # Utility Libraries
 python-dotenv     # Environment variable management
+jinja2
 
 # Testing
 pytest
