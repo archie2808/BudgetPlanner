@@ -4,17 +4,11 @@ from app.schemas import SignupRequest
 from app.models import User         
 from app.database import SessionLocal
 from app.hashpassword import hash_password, verify_password
+from app.database import get_db
 
 #Create a router instance with a prefix for grouping routes
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-#Dependency function to get a database session
-def get_db():
-    db = SessionLocal() #Create a new db session
-    try:
-        yield db
-    finally:
-        db.close() #Make sure the session is closed after the request
     
 @router.post("/signup")
 def signup(signup_data: SignupRequest, db: Session = Depends(get_db)):

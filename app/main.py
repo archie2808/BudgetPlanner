@@ -15,6 +15,7 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(auth.router)
 
+
 @app.get("/")
 def get_homepage(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
