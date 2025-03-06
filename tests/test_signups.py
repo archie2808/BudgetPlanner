@@ -37,7 +37,7 @@ def test_signup_creates_user():
     # Parse the JSON response and confirm it contains a user ID
     response_data = response.json()
     print(f"response_data: {response_data}")
-    assert "USER_ID" in response_data,"UID NOT IN RESPONSE"
+    assert "User_ID" in response_data,"UID NOT IN RESPONSE"
 
     # Verify the user was created in the database
     db: Session = next(override_get_db())
@@ -45,4 +45,5 @@ def test_signup_creates_user():
     
     # Assert that a user was found and that the hashed password is stored (and different from the plain password)
     assert user is not None, "User not found in database"
-    assert user.hashed_password != test_data["password"], "Stored password should be hashed"
+    assert user.hashed_passwords != test_data["password"], "Stored password should be hashed"
+    print(user.hashed_passwords)

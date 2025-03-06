@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
-from app.schemas import SignupRequest  
+from app.schemas import SignupRequest, LoginRequest
 from app.models import User         
 from app.database import SessionLocal
 from app.hashpassword import hash_password, verify_password
@@ -40,3 +40,18 @@ def signup(signup_data: SignupRequest, db: Session = Depends(get_db)):
 
     return{"message": "User created successfully",
             "User_ID": new_user.id}
+
+@router.post("/login")
+def login(login_data: LoginRequest, db: Session = Depends(get_db)):
+    #check if the username exists
+    existing_user = db.query(User).filter(User.username == login_data.username).first()
+    if not existing_user:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            detail = "Username not found"
+        )
+    # Compare the passwords
+    stored_hash = existing_user.hashed_passwords
+    verify = verify_password(login_data.password, stored_hash)
+    assert verify == True, "Problem Verifying Password"
+    return{"message": "Login Successful"}
