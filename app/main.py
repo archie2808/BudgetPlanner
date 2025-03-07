@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from fastapi.staticfiles import StaticFiles
 from app.database import SessionLocal
 from app.models import Transaction
-from app.routers import auth
+from app.routers import tokens, users
 
 templates = Jinja2Templates(directory = "app/templates")
 
@@ -13,7 +13,8 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
-app.include_router(auth.router)
+app.include_router(tokens.router)
+app.include_router(users.router)
 
 
 @app.get("/")

@@ -1,16 +1,16 @@
 # FastAPI & Web Server
 fastapi
 uvicorn
-pyjwt
+pyJWT
 
 # Database & ORM
 sqlalchemy
 alembic
-psycopg2-binary  # For PostgreSQL, remove if using SQLite
+psycopg2-binary  
 
 # Authentication & Security
 passlib  # Secure password hashing
-python-jose       # JWT authentication
+
 python-multipart  # Form data handling for uploads
 
 # Data Processing

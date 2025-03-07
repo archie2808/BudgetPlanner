@@ -29,7 +29,7 @@ def test_signup_creates_user():
         "password": "testpassword"
     }
     # Send a POST request to the signup endpoint with JSON payload
-    response = client.post("/auth/signup", json = test_data)
+    response = client.post("/users", json = test_data)
 
     # Verify the response status code is 200 ok 
     assert response.status_code == 200, f"Response: {response.text}"
