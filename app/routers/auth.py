@@ -16,7 +16,7 @@ from jwt.exceptions import InvalidTokenError
 # Load environmnet variables
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
-ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRY_MINUTES")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRY_MINUTES", 15))
 ALGORITHM = os.getenv("ALGORITHM")
 
 #Create a router instance with a prefix for grouping routes
