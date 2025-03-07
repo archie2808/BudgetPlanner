@@ -1,6 +1,7 @@
 # FastAPI & Web Server
 fastapi
 uvicorn
+pyjwt
 
 # Database & ORM
 sqlalchemy
