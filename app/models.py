@@ -11,29 +11,44 @@ class User(Base):
     """
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key = True, index = True)
+    id = Column(Integer, primary_key = True, index=True)
     username = Column(String, unique = True, nullable = False)
     hashed_passwords = Column(String, nullable = False)
 
-class Account(Base):
-    __tablename__ = "accounts"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    name = Column(String, nullable=False)
 
+class Conversation(Base):
+    __tablename__ = "conversations"
+    id = Column(Integer, primary_key=True, index=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    members = relationship("ConversationMember", back_populates="conversation")
+
+class ConversationMember(Base):
+    """
+    Association table to track which users belong to which conversation
+    """
+    __tablename__ = "conversation_members"
+    id = Column(Integer, primary_key=True, index=True)
+    conversation_id = Column(Integer, ForeignKey("conversations.id"), nullable = False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    joined_at = Column(DateTime, default=datetime.utcnow)
+
+
+    conversation = relationship("Conversation", back_populates="members")
     user = relationship("User")
 
-class Transaction(Base):
-    __tablename__ = "transactions"
-    
+class Message(Base):
+    __tablename__ = "messages"
     id = Column(Integer, primary_key=True, index=True)
-    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
-    amount = Column(Float, nullable=False)
-    category = Column(String, nullable=False)
-    date = Column(DateTime, default=datetime.utcnow)
-    description = Column(String)
+    conversation_id = Column(Integer, ForeignKey("conversations.id"), nullable=False)
+    sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    content = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)
 
-    account = relationship("Account")
+    conversation = relationship("Conversation")
+    sender = relationship("User")
+
+
 
 
